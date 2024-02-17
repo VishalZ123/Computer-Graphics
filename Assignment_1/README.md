@@ -6,8 +6,8 @@
 ### Breif
 Calculate the location of vertices and face indices of any two type of dodecahedron and make a 3D model from it
 <div style="display: flex; justify-content: space-around;">
-    <img src="./Recording 2024-02-17 050440.gif" height="500" width="500">
-    <img src="./Recording 2024-02-17 052941.gif" height="500" width="500">
+    <img src="./assets/Recording 2024-02-17 050440.gif" height="400" width="400">
+    <img src="./assets/Recording 2024-02-17 052941.gif" height="400" width="400">
 </div>
 <br />
 <div style="display: flex; justify-content: space-around;">
@@ -20,8 +20,8 @@ Calculate the location of vertices and face indices of any two type of dodecahed
 ### Breif
 Create a 2D House using OpenGL as shown in the image.
 <div style="display: flex; justify-content: space-around;">
-    <img src="./house.png" height="500" width="500">
-    <img src="./Recording 2024-02-17 055238.gif" height="500" width="500">
+    <img src="./assets/house.png" height="400" width="400">
+    <img src="./assets/Recording 2024-02-17 055238.gif" height="400" width="400">
 </div>
 <br />
 <div style="display: flex; justify-content: space-around;">
