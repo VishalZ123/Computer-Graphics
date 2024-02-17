@@ -4,30 +4,50 @@
 ## 1. How many faces is too many faces?
 
 ### Breif
-Calculate the location of vertices and face indices of any two type of dodecahedron and make a 3D model from it
-<div style="display: flex; justify-content: space-around;">
-    <img src="./assets/Recording 2024-02-17 050440.gif" height="400" width="400">
-    <img src="./assets/Recording 2024-02-17 052941.gif" height="400" width="400">
-</div>
-<br />
-<div style="display: flex; justify-content: space-around;">
-<div><b>Regular Dodechedron</b></div>
-<div><b>Decagonal Prism</b></div>
-</div>
+Calculate the location of vertices and face indices of any two type of dodecahedron and make a 3D model from it.
+
+<table>
+  <tr>
+    <td>
+      <img src="./assets/Recording 2024-02-17 050440.gif" width="400"/>
+    </td>
+    <td>
+      <img src="./assets/Recording 2024-02-17 052941.gif" width="400"/>
+    </td>
+  </tr>
+  <tr align="center">
+  <td>
+    <strong>Regular Dodecahedron</strong>
+  </td>
+    <td>
+        <strong>Decogonal Prism</strong>
+    </td>
+    </tr>
+</table>
 
 ## 2. House
 
 ### Breif
 Create a 2D House using OpenGL as shown in the image.
-<div style="display: flex; justify-content: space-around;">
-    <img src="./assets/house.png" height="400" width="400">
-    <img src="./assets/Recording 2024-02-17 055238.gif" height="400" width="400">
-</div>
-<br />
-<div style="display: flex; justify-content: space-around;">
-<div><b>Original Image</b></div>
-<div><b>OpenGL</b></div>
-</div>
+
+<table>
+  <tr>
+    <td>
+      <img src="./assets/house.png" width="400"/>
+    </td>
+    <td>
+      <img src="./assets/Recording 2024-02-17 055238.gif" width="400"/>
+    </td>
+  </tr>
+  <tr align="center">
+  <td>
+    <strong>Original Image</strong>
+  </td>
+    <td>
+        <strong>OpenGL</strong>
+    </td>
+    </tr>
+</table>
 
 ## Instruction
 - To run the code, you need to have `OpenGL` and `GLUT` installed in your system.
