@@ -67,3 +67,11 @@ Create a 2D House using OpenGL as shown in the image.
     ```bash
     ./main
     ```
+## Controls
+`q` - Quit the program<br />
+
+`+` - Zoom in<br />
+
+`-` - Zoom out<br />
+
+`Mouse Drag` - Rotate the object
