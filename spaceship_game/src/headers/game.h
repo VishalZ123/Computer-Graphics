@@ -1,0 +1,10 @@
+extern GLint sweepCounter;
+extern GLfloat backgroundSweep;
+extern int gameState;
+void drawGameOver(bool won = false);
+void drawPause();
+void restartGame();
+void drawProgressBar(float height);
+void drawHealthBar(float width, bool container = false);
+void drawStartScreen();
+void drawScore();
