@@ -46,7 +46,7 @@ camera.lookAt(playerBikeConfig.position);
 
 // apply environment map from .hdr file
 const hdrLoader = new RGBELoader();
-const envMap = await hdrLoader.loadAsync("assets/textures/envmap.hdr");
+const envMap = await hdrLoader.loadAsync("./assets/textures/envmap.hdr");
 envMap.mapping = THREE.EquirectangularReflectionMapping;
 scene.environment = envMap;
 const params = {
