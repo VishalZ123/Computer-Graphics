@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Bike Game</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div id="app"></div>
+    <div id="time">Time : 0.00</div>
+    <div id="start-screen">
+        <div id="game-state">3D Bike Game</div>
+        <div id="description">
+            Press 'SPACE' to start the game<br><br>
+            <center><b>Controls</b></center><br />
+            W - Move Forward<br>
+            S - Brake / Move Backward<br>
+            A - Rotate Left<br>
+            D - Rotate Right<br>
+            SPACE - Pause/Resume<br>
+            T - Toggle Camera View
+        </div>
+    </div>
+    <div id="pause-screen">
+        <div id="game-state">Game Paused</div>
+        <div id="description">
+            Press 'SPACE' to resume the game<br>
+            Press 'R' to restart the game<br>
+        </div>
+    </div>
+    <div id="game-over-screen">
+        <div id="game-state">Game Over</div>
+        <div id="description">
+            You did not complete the lap. <br>
+            Press 'R' to restart the game<br>
+        </div>
+    </div>
+    <div id="game-win-screen">
+        <div id="game-state">You Win</div>
+        <div id="description">
+            Your Time: <br>
+            Press 'R' to restart the game<br>
+        </div>
+    </div>
+    <div id="fuel">Fuel</div>
+    <div id="fuel-bar"></div>
+    <div id="fuel-length"></div>
+    <div id="health">Health</div>
+    <div id="health-bar"></div>
+    <div id="health-length"></div>
+    <script type="module" src="./main.js"></script>
+</body>
+
+</html>
