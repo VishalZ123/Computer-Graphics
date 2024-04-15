@@ -1,14 +1,16 @@
-#include <GL/glut.h>
+#include "include/freeglut/include/GL/glut.h"
 #include <cstdlib>
 #include <ctime>
-#include "headers/constants.h"
-#include "headers/background.h"
-#include "headers/spaceship.h"
-#include "headers/controls.h"
-#include "headers/asteroids.h"
-#include "headers/spacestation.h"
-#include "headers/game.h"
-#include "headers/utils.h"
+
+#include "include/constants.h"
+#include "include/background.h"
+#include "include/spaceship.h"
+#include "include/controls.h"
+#include "include/asteroids.h"
+#include "include/spacestation.h"
+#include "include/minimap.h"
+#include "include/game.h"
+#include "include/utils.h"
 
 void display()
 {
@@ -17,38 +19,42 @@ void display()
 
     if (gameState == GAMEOVER)
     {
-        drawGameOver();
+        drawGameOver(); // Draw game over screen
         glutSwapBuffers();
         return;
     }
     if (gameState == GAMEWON)
     {
-        drawGameOver(true);
+        drawGameOver(true); // Draw game won screen
         glutSwapBuffers();
         return;
     }
     if (gameState == PAUSE)
     {
-        drawPause();
+        drawPause(); // Draw pause screen
         glutSwapBuffers();
         return;
     }
     if (gameState == GAMESTART)
     {
-        drawStartScreen();
+        drawStartScreen(); // Draw start screen
         glutSwapBuffers();
         return;
     }
 
+    // draw different components
     drawStars();
-    drawSpaceship();
     drawAsteroids();
+    glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
     if (sweepCounter >= totalSweeps)
     {
         drawSpaceStation();
     }
+    drawSpaceship();
+    glColor4f(1.0f, 1.0f, 1.0f, 0.6f);
+    drawMiniMap();
     drawScore();
-    
+
     glColor4f(1.0f, 1.0f, 1.0f, 0.3f);
     drawProgressBar(200);
     glColor4f(0.0f, 1.0f, 0.0f, 0.5f);
@@ -103,7 +109,7 @@ void resize(int width, int height)
     glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(_left, _right, _bottom, _top);
+    gluOrtho2D(_left, _right, _bottom, _top); // Orthographic projection
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 }
@@ -117,9 +123,13 @@ void update(int value)
         glutTimerFunc(16, update, 0);
         return;
     }
+
+    // update different components
     updateStars();
     updateSpaceship();
     updateAsteroids();
+
+    // track the progress of the game
     backgroundSweep -= sweepSpeed;
     if (backgroundSweep < _bottom && sweepCounter < totalSweeps)
     {
@@ -127,6 +137,7 @@ void update(int value)
         backgroundSweep = _top;
     }
 
+    // check if the spaceship has reached the space station
     if (sweepCounter >= totalSweeps)
     {
         pollSpaceStation();
@@ -143,12 +154,19 @@ int main(int argc, char **argv)
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(50, 50);
-    glutCreateWindow("Spaceship Game");
+    glutCreateWindow("Space Odyssey");
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Black background
+    glClearColor(0.0f, 0.0f, 0.0f, 0.5f); // Black background
+
+    // initiate different components
+    initStars();
+    initMinimap();
+    initSpaceship();
+    initAsteroids();
+    initSpaceStation();
 
     glutReshapeFunc(resize);
     glutDisplayFunc(display);
@@ -156,9 +174,6 @@ int main(int argc, char **argv)
     glutSpecialFunc(specialKeyPressed);
     glutSpecialUpFunc(specialKeyReleased);
 
-    initStars();
-    initAsteroids();
-    initSpaceStation();
     glutTimerFunc(16, update, 0);
 
     glutMainLoop();

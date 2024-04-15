@@ -1,12 +1,13 @@
 #include <math.h>
-#include <GL/glut.h>
-#include "headers/spaceship.h"
-#include "headers/constants.h"
+#include "include/freeglut/include/GL/glut.h"
 
-static bool upPressed = false;
-static bool downPressed = false;
-static bool leftPressed = false;
-static bool rightPressed = false;
+#include "include/spaceship.h"
+#include "include/constants.h"
+
+bool upPressed = false;
+bool downPressed = false;
+bool leftPressed = false;
+bool rightPressed = false;
 
 void specialKeyPressed(int key, int x, int y)
 {

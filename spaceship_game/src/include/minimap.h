@@ -1,0 +1,2 @@
+void initMinimap();
+void drawMiniMap();

@@ -1,13 +1,12 @@
-#include <GL/glut.h>
-#include <GL/gl.h>
+#include "include/freeglut/include/GL/glut.h"
 #include <math.h>
 #include <string>
 using namespace std;
-#include "headers/spaceship.h"
-#include "headers/constants.h"
-#include "headers/asteroids.h"
-#include "headers/spacestation.h"
-#include "headers/background.h"
+#include "include/spaceship.h"
+#include "include/constants.h"
+#include "include/asteroids.h"
+#include "include/spacestation.h"
+#include "include/background.h"
 
 GLint sweepCounter = 0;
 GLfloat backgroundSweep = _top;
@@ -40,13 +39,12 @@ void drawGameOver(bool won = false)
     glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char *)"Press 'r' to restart");
     glRasterPos2f(0.30 * _left, 0.25 * _top - 100.0f);
     glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char *)"Press 'q' to quit");
-    
+
     char buffer[20];
     snprintf(buffer, sizeof(buffer), "Score: %d", spaceship.getScore());
     glColor3f(1.0f, 1.0f, 1.0f);
     glRasterPos2f(0.30 * _left, 0.25 * _top - 250.0f);
     glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char *)buffer);
-
 }
 
 void drawPause()
@@ -94,6 +92,7 @@ void drawStartScreen()
 
 void restartGame()
 {
+    // Reset game state
     gameState = PLAY;
     sweepCounter = 0;
     backgroundSweep = _top;
@@ -103,6 +102,7 @@ void restartGame()
     initStars();
     initAsteroids();
     spaceship.setHealth(100.0f);
+
     glutPostRedisplay();
 }
 

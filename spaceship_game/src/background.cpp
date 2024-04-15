@@ -1,5 +1,5 @@
-#include <GL/glut.h>
-#include "headers/constants.h"
+#include "include/freeglut/include/GL/glut.h"
+#include "include/constants.h"
 
 GLfloat stars[numStars][2];
 
@@ -7,6 +7,7 @@ void initStars()
 {
     for (int i = 0; i < numStars; i++)
     {
+        // Random x and y coordinates for stars
         stars[i][0] = static_cast<float>((rand() % (_top - _bottom)) - (_top - _bottom) / 2);
         stars[i][1] = static_cast<float>((rand() % (_top - _bottom)) - (_top - _bottom) / 2);
     }
@@ -28,7 +29,7 @@ void updateStars()
 {
     for (int i = 0; i < numStars; i++)
     {
-        stars[i][1] -= 1.0f; // Move stars down by 1 units
+        stars[i][1] -= 1.0f; // Move stars down by 1 units with each frame
         if (stars[i][1] < _bottom)
         {
             stars[i][0] = static_cast<float>((rand() % (_top - _bottom)) - (_top - _bottom) / 2); // Random x-coordinate
