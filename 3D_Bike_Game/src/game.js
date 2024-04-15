@@ -5,7 +5,7 @@ import {
   GAME_WIN,
   GAME_PAUSE
 } from "./constants";
-
+import { getTime } from "./timer";
 var gameState = GAME_START;
 
 const startDashboard = document.querySelector("#start-screen");
@@ -42,6 +42,9 @@ function changeState(state) {
   } else if (gameState === GAME_WIN) {
     gameWinDashboard.style.visibility = "visible";
     gameWinDashboard.querySelector("#game-state").style.color = "yellow";
+    gameWinDashboard
+      .querySelector("#description")
+      .querySelector("#summary").innerText = `Time : ${getTime().toFixed(2)}`;
   }
 }
 

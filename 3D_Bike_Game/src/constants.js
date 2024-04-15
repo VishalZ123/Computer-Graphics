@@ -9,7 +9,7 @@ const moveSpeedForward = 0.001;
 const moveSpeedBackward = 0.01;
 const maxSpeedForward = 0.1;
 const maxSpeedBackward = -0.01;
-const mileage = 50;
+const mileage = 60;
 
 export {
   GAME_START,

@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
 import { GroundedSkybox } from "three/addons/objects/GroundedSkybox.js";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { loadObject } from "./src/loadObjects.js";
 import {
   trackConfig,
@@ -13,9 +12,9 @@ import {
   updateBikePosition,
   setSpeed,
   setFuel,
-  getFuel
+  getFuel,
+  setCanWin
 } from "./src/controls.js";
-import { addLights } from "./src/addLights.js";
 import { changeState, gameState } from "./src/game.js";
 import {
   GAME_START,
@@ -24,6 +23,7 @@ import {
   GAME_WIN,
   GAME_PAUSE
 } from "./src/constants";
+import { updateTimer, resetTimer, getTime } from "./src/timer.js";
 
 const scene = new THREE.Scene();
 const app = document.querySelector("#app");
@@ -58,7 +58,8 @@ let skybox = new GroundedSkybox(envMap, params.height, params.radius);
 skybox.position.y = params.height - 0.01;
 scene.add(skybox);
 
-addLights(scene);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+scene.add(ambientLight);
 
 // load the track model
 loadObject("./assets/models/race_track.fbx", scene, trackConfig);
@@ -118,6 +119,7 @@ function drawFuelCans() {
         ) {
           if (config.used) return;
           setFuel(1);
+          setCanWin(true);
           model.visible = false;
           config.used = true;
         }
@@ -145,23 +147,17 @@ plane.rotation.x = -1;
 plane.position.set(27.6, 0.7, 9.7);
 scene.add(plane);
 
-// controls
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-
-var t = 0;
 var health = 1;
 import { paths } from "./src/paths.js";
 var c = [0, 0, 0];
+
 function animate() {
   requestAnimationFrame(animate);
-  controls.update();
   if (getFuel() <= 0) {
     changeState(GAME_OVER);
   }
   if (gameState === GAME_PLAY) {
-    t += 1 / 60;
-    document.querySelector("#time").innerText = `Time : ${t.toFixed(2)}`;
+    updateTimer();
     updateBikePosition(camera);
     for (let i = 0; i < paths.length; i++) {
       if (c[i] < paths[i].length) {
@@ -218,7 +214,7 @@ function handleKeyDown(event) {
       gameState === GAME_WIN
     ) {
       changeState(GAME_START);
-      t = 0;
+      resetTimer();
       document.querySelector("#time").innerText = `Time : 0.00`;
       // reset the bike position
       playerBikeConfig.position.copy(resetConfig.bike.position);
@@ -231,6 +227,7 @@ function handleKeyDown(event) {
       camera.lookAt(playerBikeConfig.position);
       setSpeed(0);
       setFuel(1);
+      setCanWin(false);
       c = [0, 0, 0];
       document.querySelector("#fuel-length").style.width = "150px";
       document.querySelector("#health-length").style.width = "150px";
@@ -246,3 +243,10 @@ function handleKeyDown(event) {
   }
 }
 document.addEventListener("keydown", handleKeyDown);
+
+//responsive
+window.onresize = () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(app.offsetWidth, app.offsetHeight);
+};

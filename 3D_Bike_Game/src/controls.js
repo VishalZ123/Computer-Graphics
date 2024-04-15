@@ -1,5 +1,7 @@
 import * as THREE from "three";
 import { playerBikeConfig } from "./configs";
+import { changeState } from "./game";
+import { GAME_WIN } from "./constants";
 
 import {
   maxSpeedForward,
@@ -12,6 +14,7 @@ import {
 
 let speed = 0;
 let fuel = 1;
+let canWin = false;
 
 // Variables to track movement in each direction
 let moveForward = false;
@@ -29,6 +32,16 @@ function setFuel(newFuel) {
 
 function getFuel() {
   return fuel;
+}
+
+function setCanWin(flag) {
+  canWin = flag;
+}
+
+function crossedLine(position) {
+  const x = position.x;
+  const z = position.z;
+  return x > 28.17 && x < 28.81 && z > 11.2 && z < 13.24;
 }
 
 // Add event listeners for keyboard inputs
@@ -110,7 +123,10 @@ function updateBikePosition(camera) {
 
   playerBikeConfig.position.addScaledVector(direction, -speed);
   camera.position.addScaledVector(direction, -speed);
-
+  // check if win
+  if (canWin && crossedLine(playerBikeConfig.position)) {
+    changeState(GAME_WIN);
+  }
   if (moveLeft) {
     playerBikeConfig.rotation.y += rotationSpeed;
     camera.position.addScaledVector(
@@ -128,4 +144,4 @@ function updateBikePosition(camera) {
   }
 }
 
-export { updateBikePosition, setSpeed, setFuel, getFuel };
+export { updateBikePosition, setSpeed, setFuel, getFuel, setCanWin };
